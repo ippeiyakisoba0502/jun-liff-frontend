@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <!-- LIFF SDK を静的読み込み（GAS iframe 内では動的読み込みだと init が応答しないことがある） -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
@@ -16,7 +15,7 @@
   window.addEventListener("unhandledrejection", (e) => msg("unhandled: " + (e.reason?.message || e.reason)));
 
   const LIFF_ID = "2009381340-R52TBwSU";
-  const FORM_BASE = "https://forms.gle/VzLcgh8rQpkjrP5z8";
+  const FORM_BASE = "https://docs.google.com/forms/d/1QMgDzQy03CHh15eDZ_m7P37CDS5T4XtBy--hYb-hUrY";
   const ENTRY_LINEID = "entry.1968653097";
 
   (async () => {
