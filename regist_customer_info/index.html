@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <!-- LIFF SDK を静的読み込み（GAS iframe 内では動的読み込みだと init が応答しないことがある） -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
@@ -11,7 +10,6 @@
 <script>
   const msg = (t) => document.getElementById("msg").innerText = t;
 
-  // ① まずJSエラーを拾う
   window.addEventListener("error", (e) => msg("window error: " + e.message));
   window.addEventListener("unhandledrejection", (e) => msg("unhandled: " + (e.reason?.message || e.reason)));
 
