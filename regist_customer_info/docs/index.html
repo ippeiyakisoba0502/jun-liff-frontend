@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+<div id="msg" style="white-space:pre-wrap;font-family:sans-serif;"></div>
+
+<script>
+  const msg = (t) => document.getElementById("msg").innerText = t;
+
+  window.addEventListener("error", (e) => msg("window error: " + e.message));
+  window.addEventListener("unhandledrejection", (e) => msg("unhandled: " + (e.reason?.message || e.reason)));
+
+  const LIFF_ID = "2009381340-R52TBwSU";
+  const FORM_BASE = "https://forms.gle/VzLcgh8rQpkjrP5z8";
+  const ENTRY_LINEID = "entry.1968653097";
+
+  (async () => {
+    msg("初期化中…(liff.init)");
+    if (typeof liff === "undefined") {
+      msg("エラー: LIFF SDK が読み込まれていません");
+      return;
+    }
+    await liff.init({ liffId: LIFF_ID });
+
+    msg("init完了\nisInClient=" + liff.isInClient() + "\nisLoggedIn=" + liff.isLoggedIn());
+
+    if (!liff.isInClient()) {
+      msg("LINEアプリ内のLIFFとして起動できていません（開き方/導線を確認）");
+      return;
+    }
+
+    const profile = await liff.getProfile();
+    msg("profile取得OK userId=" + profile.userId);
+
+    const url = `${FORM_BASE}&${ENTRY_LINEID}=${encodeURIComponent(profile.userId)}`;
+    msg("フォームを開きます…");
+    liff.openWindow({ url, external: true });
+  })().catch(e => {
+    msg("エラー: " + (e?.message || e));
+  });
+</script>
+</body>
+</html>
