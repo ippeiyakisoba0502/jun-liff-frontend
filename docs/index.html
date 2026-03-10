@@ -39,7 +39,7 @@
 
     const url = `${FORM_BASE}?${ENTRY_LINEID}=${encodeURIComponent(profile.userId)}`;
     msg("フォームを開きます…");
-    liff.openWindow({ url, external: true });
+    liff.openWindow({ url, external: false });
   })().catch(e => {
     msg("エラー: " + (e?.message || e));
   });
